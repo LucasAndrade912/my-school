@@ -1,5 +1,5 @@
+import { useCallback } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
 import {
   useFonts,
   Rubik_400Regular,
@@ -7,8 +7,12 @@ import {
   Rubik_600SemiBold,
   Rubik_700Bold
 } from '@expo-google-fonts/rubik'
+import * as SplashScreen from 'expo-splash-screen'
 
-import { theme } from './src/theme'
+import { SignIn } from './src/screens/SignIn'
+import { Background } from './src/components/Background'
+
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
@@ -18,28 +22,20 @@ export default function App() {
     Rubik_700Bold
   })
 
+  const onLayoutRootView = useCallback(async () => {
+    if (isFontsLoaded) {
+      await SplashScreen.hideAsync()
+    }
+  }, [isFontsLoaded])
+
   if (!isFontsLoaded) {
     return null
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>MySchool 📚</Text>
+    <Background onLayout={onLayoutRootView}>
+      <SignIn />
       <StatusBar style="light" translucent />
-    </View>
+    </Background>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.black[900],
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: theme.colors.white[900],
-    fontFamily: theme.fonts['lg'].font,
-    fontSize: theme.fonts['lg'].size
-  }
-})

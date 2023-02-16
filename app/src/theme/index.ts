@@ -1,3 +1,7 @@
+import { Platform } from 'react-native'
+
+const isAndroid = Platform.OS === 'android'
+
 export const theme = {
   colors: {
     black: {
@@ -58,5 +62,14 @@ export const theme = {
       size: 8,
       font: 'Rubik_400Regular'
     },
+  },
+  radius: {
+    lg: 14
+  },
+  shadows: {
+    md: {
+      shadow: `0px 3px 5px rgba(255, 255, 255, ${isAndroid ? '1' : '0.15'})`,
+      elevation: 7
+    }
   }
 }
