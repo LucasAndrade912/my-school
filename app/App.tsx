@@ -11,6 +11,7 @@ import * as SplashScreen from 'expo-splash-screen'
 
 import { SignIn } from './src/screens/SignIn'
 import { Background } from './src/components/Background'
+import { AuthContextProvider } from './src/context/AuthContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -33,9 +34,11 @@ export default function App() {
   }
 
   return (
-    <Background onLayout={onLayoutRootView}>
-      <SignIn />
-      <StatusBar style="light" translucent />
-    </Background>
+    <AuthContextProvider>
+      <Background onLayout={onLayoutRootView}>
+        <SignIn />
+        <StatusBar style="light" translucent />
+      </Background>
+    </AuthContextProvider>
   )
 }

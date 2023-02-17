@@ -1,8 +1,7 @@
-import { useState } from 'react'
-
 import BackgroundIcons from '../../assets/background-icons.png'
 
 import { Loading } from '../../components/Loading'
+import { useAuth } from '../../hooks/useAuth'
 
 import {
   Container,
@@ -14,15 +13,7 @@ import {
 } from './styles'
 
 export function SignIn() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  async function handleSignInUser() {
-    setIsLoading(true)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
-  }
+  const { isLoading, signIn } = useAuth()
 
   return (
     <Container source={BackgroundIcons}>
@@ -34,7 +25,7 @@ export function SignIn() {
         O app que vai te ajudar a focar nos estudos
       </SubTitle>
 
-      <SignInButton activeOpacity={0.7} onPress={handleSignInUser} disabled={isLoading}>
+      <SignInButton activeOpacity={0.7} onPress={signIn} disabled={isLoading}>
         {
           isLoading
             ? <Loading />
