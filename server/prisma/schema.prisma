@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  googleId String @unique
+
+  courses Course[]
+
+  @@map("users")
+}
+
+model Course {
+  id      String  @id @default(uuid())
+  name    String
+  icon    String
+  ownerId String?
+
+  classes Class[]
+  owner   User?   @relation(fields: [ownerId], references: [id])
+
+  @@map("courses")
+}
+
+model Class {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  hourStart   DateTime
+  hourEnd     DateTime
+  assisted    Boolean
+  courseId    String?
+
+  course          Course?           @relation(fields: [courseId], references: [id])
+  tasks           Task[]
+  classesInTheDay ClassesInTheDay[]
+
+  @@map("classes")
+}
+
+model Task {
+  id        String  @default(uuid())
+  name      String
+  completed Boolean
+  classId   String
+
+  class Class? @relation(fields: [classId], references: [id])
+
+  @@id([id, classId])
+  @@map("tasks")
+}
+
+model Day {
+  id   String   @id @default(uuid())
+  date DateTime @unique
+
+  classesInTheDay ClassesInTheDay[]
+
+  @@map("days")
+}
+
+model ClassesInTheDay {
+  classId String
+  dayId   String
+
+  class Class @relation(fields: [classId], references: [id])
+  day   Day   @relation(fields: [dayId], references: [id])
+
+  @@id([classId, dayId])
+  @@map("classesInTheDay")
+}
