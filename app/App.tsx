@@ -13,6 +13,9 @@ import { SignIn } from './src/screens/SignIn'
 import { Background } from './src/components/Background'
 import { AuthContextProvider } from './src/context/AuthContext'
 
+import { api } from './src/lib/api'
+import { asyncGetData } from './src/utils/asyncGetData'
+
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
@@ -25,6 +28,9 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (isFontsLoaded) {
+      const token = await asyncGetData('@token')
+      if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       await SplashScreen.hideAsync()
     }
   }, [isFontsLoaded])
