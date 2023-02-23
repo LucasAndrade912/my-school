@@ -1,4 +1,4 @@
-export interface HttpAdapter<T, K> {
+export interface HttpAdapter<K> {
   createServer: (routes: K) => {
     startServer: (port: number) => void
   }
