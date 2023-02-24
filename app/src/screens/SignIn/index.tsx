@@ -1,7 +1,8 @@
 import BackgroundIcons from '../../assets/background-icons.png'
 
-import { Loading } from '../../components/Loading'
 import { useAuth } from '../../hooks/useAuth'
+import { Loading } from '../../components/Loading'
+import { Background } from '../../components/Background'
 
 import {
   Container,
@@ -16,30 +17,32 @@ export function SignIn() {
   const { isLoading, signIn } = useAuth()
 
   return (
-    <Container source={BackgroundIcons}>
-      <Title>
+    <Background>
+      <Container source={BackgroundIcons}>
+        <Title>
         Bem-vindo ao MySchool
-      </Title>
+        </Title>
 
-      <SubTitle>
+        <SubTitle>
         O app que vai te ajudar a focar nos estudos
-      </SubTitle>
+        </SubTitle>
 
-      <SignInButton activeOpacity={0.7} onPress={signIn} disabled={isLoading}>
-        {
-          isLoading
-            ? <Loading />
-            : (
-              <>
-                <SignInButtonIcon name="google" />
+        <SignInButton activeOpacity={0.7} onPress={signIn} disabled={isLoading}>
+          {
+            isLoading
+              ? <Loading />
+              : (
+                <>
+                  <SignInButtonIcon name="google" />
 
-                <SignInButtonText>
+                  <SignInButtonText>
                   Entrar com o Google
-                </SignInButtonText>
-              </>
-            )
-        }
-      </SignInButton>
-    </Container>
+                  </SignInButtonText>
+                </>
+              )
+          }
+        </SignInButton>
+      </Container>
+    </Background>
   )
 }

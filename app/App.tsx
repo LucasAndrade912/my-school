@@ -7,9 +7,10 @@ import {
   Rubik_600SemiBold,
   Rubik_700Bold
 } from '@expo-google-fonts/rubik'
+import { NavigationContainer } from '@react-navigation/native'
 import * as SplashScreen from 'expo-splash-screen'
 
-import { SignIn } from './src/screens/SignIn'
+import { AppRoutes } from './src/routes/app.routes'
 import { Background } from './src/components/Background'
 import { AuthContextProvider } from './src/context/AuthContext'
 
@@ -40,11 +41,13 @@ export default function App() {
   }
 
   return (
-    <AuthContextProvider>
-      <Background onLayout={onLayoutRootView}>
-        <SignIn />
-        <StatusBar style="light" translucent />
-      </Background>
-    </AuthContextProvider>
+    <NavigationContainer>
+      <AuthContextProvider>
+        <Background onLayout={onLayoutRootView}>
+          <AppRoutes />
+          <StatusBar style="light" translucent />
+        </Background>
+      </AuthContextProvider>
+    </NavigationContainer>
   )
 }
