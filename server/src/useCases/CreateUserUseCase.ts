@@ -1,16 +1,20 @@
+import { ValidatorAdapter } from '../adapters/ValidatorAdapter'
 import { JsonWebTokenAdapter } from '../adapters/JsonWebTokenAdapter'
 import { SqlUsersRepositoryInterface } from '../repositories/User/SqlUsersRepositoryInterface'
 
 export class CreateUserUseCase {
 	constructor (
     private repository: SqlUsersRepositoryInterface,
-    private jwt: JsonWebTokenAdapter
+    private jwt: JsonWebTokenAdapter,
+    private validator: ValidatorAdapter
 	) {}
 
 	public async execute(accessToken: string) {
-		if (!accessToken) {
-			throw new Error('Access Token is required')
-		}
+		const schema = this.validator.createSchema({
+			accessToken: this.validator.types.string()
+		})
+
+		schema.validate({ accessToken })
 
 		const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
 			headers: {

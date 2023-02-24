@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 
 import { JWTAdapter } from '../adapters/JwtAdapter'
+import { ZodAdapter } from '../adapters/ZodAdapter'
 import { SqlUsersRepository } from '../repositories/User/SqlUsersReposiitory'
 
 import { CreateUserUseCase } from '../useCases/CreateUserUseCase'
@@ -10,7 +11,8 @@ export class CreateUserController {
 		try {
 			const repository = new SqlUsersRepository()
 			const jwt = new JWTAdapter()
-			const createUserUseCase = new CreateUserUseCase(repository, jwt)
+			const zod = new ZodAdapter()
+			const createUserUseCase = new CreateUserUseCase(repository, jwt, zod)
 
 			const data = await createUserUseCase.execute(req.body.accessToken)
 
