@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+
+import { useToast } from '../../hooks/useToast'
 
 import { Button } from '../../components/Button'
 import { Background } from '../../components/Background'
@@ -24,6 +27,9 @@ export function CreateCourse() {
   const [icon, setIcon] = useState('📚')
   const [cardColor, setCardColor] = useState(theme.colors.purple)
 
+  const toast = useToast()
+  const { navigate } = useNavigation()
+
   function resetStates() {
     setName('')
     setIcon('📚')
@@ -32,9 +38,10 @@ export function CreateCourse() {
 
   function createCourse() {
     if (name.trim() === '') {
-      // exibir toast de erro
+      toast.show('error', 'Ocorreu um erro na criação do curso')
     } else {
-      console.log('Curso criado com sucesso!')
+      navigate('home')
+      toast.show('success', 'Seu curso foi criado com sucesso!')
     }
   }
 

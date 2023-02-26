@@ -12,6 +12,7 @@ import * as SplashScreen from 'expo-splash-screen'
 
 import { AppRoutes } from './src/routes/app.routes'
 import { Background } from './src/components/Background'
+import { ToastProvider } from './src/context/ToastContext'
 import { AuthContextProvider } from './src/context/AuthContext'
 
 import { api } from './src/lib/api'
@@ -43,10 +44,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthContextProvider>
-        <Background onLayout={onLayoutRootView}>
-          <AppRoutes />
-          <StatusBar style="light" translucent />
-        </Background>
+        <ToastProvider>
+          <Background onLayout={onLayoutRootView}>
+            <AppRoutes />
+            <StatusBar style="light" translucent />
+          </Background>
+        </ToastProvider>
       </AuthContextProvider>
     </NavigationContainer>
   )

@@ -65,6 +65,7 @@ export const theme = {
   },
   radius: {
     lg: 14,
+    md: 8,
     sm: 6
   },
   shadows: {
@@ -75,6 +76,10 @@ export const theme = {
     sm: {
       shadow: `0px 3px 6px rgba(255, 255, 255, ${isAndroid ? '1' : '0.15'})`,
       elevation: 4
+    },
+    xs: {
+      shadow: `1px 2px 3px rgba(255, 255, 255, ${isAndroid ? '1' : '0.15'});`,
+      elevation: 2
     }
   }
 }
