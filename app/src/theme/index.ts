@@ -22,7 +22,7 @@ export const theme = {
       600: '#0085E0'
     },
     green: '#63C132',
-    red: '#C81D25',
+    red: '#D13C43',
     purple: '#7353BA'
   },
   fonts: {
@@ -64,12 +64,17 @@ export const theme = {
     },
   },
   radius: {
-    lg: 14
+    lg: 14,
+    sm: 6
   },
   shadows: {
     md: {
       shadow: `0px 3px 5px rgba(255, 255, 255, ${isAndroid ? '1' : '0.15'})`,
       elevation: 7
+    },
+    sm: {
+      shadow: `0px 3px 6px rgba(255, 255, 255, ${isAndroid ? '1' : '0.15'})`,
+      elevation: 4
     }
   }
 }
