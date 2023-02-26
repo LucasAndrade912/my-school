@@ -1,6 +1,6 @@
-import { ValidatorAdapter } from '../adapters/ValidatorAdapter'
-import { JsonWebTokenAdapter } from '../adapters/JsonWebTokenAdapter'
-import { SqlUsersRepositoryInterface } from '../repositories/User/SqlUsersRepositoryInterface'
+import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
+import { JsonWebTokenAdapter } from '../../adapters/JsonWebTokenAdapter'
+import { SqlUsersRepositoryInterface } from '../../repositories/User/SqlUsersRepositoryInterface'
 
 export class CreateUserUseCase {
 	constructor (
@@ -42,7 +42,7 @@ export class CreateUserUseCase {
 			name: userInfo.name,
 			email: userInfo.email
 		}, {
-			subject: user.name,
+			subject: userInfo.id,
 			expiresIn: '7 days'
 		})
 

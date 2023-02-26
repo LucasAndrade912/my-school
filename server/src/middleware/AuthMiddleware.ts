@@ -12,7 +12,8 @@ export class AuthMiddleware {
 		}
 
 		try {
-			jwt.verify(token)
+			const { subject } = jwt.verify(token)
+			req.sub = subject
 
 			next()
 		} catch (err) {

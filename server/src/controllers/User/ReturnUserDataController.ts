@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { ReturnUserDataUseCase } from '../useCases/ReturnUserDataUseCase'
+import { ReturnUserDataUseCase } from '../../useCases/User/ReturnUserDataUseCase'
 
 export class ReturnUserDataController {
 	static async handle(req: Request, res: Response) {

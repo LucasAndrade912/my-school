@@ -15,8 +15,8 @@ export class JWTAdapter implements JsonWebTokenAdapter {
 	}
 
 	verify(token: string) {
-		const decoded = jwt.verify(token, this.SECRET) as string
+		const { sub } = jwt.verify(token, this.SECRET)
 
-		return decoded
+		return { subject: sub as string }
 	}
 }

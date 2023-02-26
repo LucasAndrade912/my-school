@@ -5,5 +5,5 @@ export interface Options {
 
 export interface JsonWebTokenAdapter {
   sign: (payload: object, options: Options) => string
-  verify: (token: string) => string
+  verify: (token: string) => { subject: string }
 }

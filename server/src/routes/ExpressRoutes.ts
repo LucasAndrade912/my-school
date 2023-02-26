@@ -1,8 +1,11 @@
 import { Router } from 'express'
 
-import { ReturnUserDataController } from '../controllers/ReturnUserDataController'
-import { CreateUserController } from '../controllers/CreateUserController'
 import { AuthMiddleware } from '../middleware/AuthMiddleware'
+
+import { CreateUserController } from '../controllers/User/CreateUserController'
+import { ReturnUserDataController } from '../controllers/User/ReturnUserDataController'
+
+import { CreateCourseController } from '../controllers/Course/CreateCourseController'
 
 export class ExpressRoutes {
 	private routes: Router
@@ -15,6 +18,11 @@ export class ExpressRoutes {
 			ReturnUserDataController.handle
 		)
 		router.post('/users', CreateUserController.handle)
+
+		router.post('/courses',
+			AuthMiddleware.handle,
+			CreateCourseController.handle
+		)
 
 		this.routes = router
 	}

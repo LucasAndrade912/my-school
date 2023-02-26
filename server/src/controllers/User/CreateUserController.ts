@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
 
-import { JWTAdapter } from '../adapters/JwtAdapter'
-import { ZodAdapter } from '../adapters/ZodAdapter'
-import { SqlUsersRepository } from '../repositories/User/SqlUsersReposiitory'
+import { JWTAdapter } from '../../adapters/JwtAdapter'
+import { ZodAdapter } from '../../adapters/ZodAdapter'
+import { SqlUsersRepository } from '../../repositories/User/SqlUsersReposiitory'
 
-import { CreateUserUseCase } from '../useCases/CreateUserUseCase'
+import { CreateUserUseCase } from '../../useCases/User/CreateUserUseCase'
 
 export class CreateUserController {
 	static async handle(req: Request, res: Response) {
