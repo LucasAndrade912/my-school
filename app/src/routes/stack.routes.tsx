@@ -4,6 +4,8 @@ import { TabRoutes } from './tab.routes'
 import { Class } from '../screens/Class'
 import { Course } from '../screens/Course'
 import { CreateClass } from '../screens/CreateClass'
+import { CreateEvent } from '../screens/CreateEvent'
+import { CreateCourse } from '../screens/CreateCourse'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -14,6 +16,8 @@ export function StackRoutes() {
       <Screen name="course" component={Course} />
       <Screen name="class" component={Class} />
       <Screen name="createClass" component={CreateClass} />
+      <Screen name="createCourse" component={CreateCourse} />
+      <Screen name="createEvent" component={CreateEvent} />
     </Navigator>
   )
 }

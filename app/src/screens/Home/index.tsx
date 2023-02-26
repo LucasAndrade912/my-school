@@ -1,11 +1,21 @@
-import { Text } from 'react-native'
-
+import { Header } from '../../components/Header'
 import { Background } from '../../components/Background'
+import { CreateCourseButton } from '../../components/CreateCourseButton'
+
+import { Container } from './styles'
 
 export function Home() {
+
   return (
     <Background>
-      <Text>Home</Text>
+      <Container>
+        <Header
+          title="Olá, Lucas"
+          subtitle="Boa sorte nas aulas de hoje 😉"
+        />
+
+        <CreateCourseButton />
+      </Container>
     </Background>
   )
 }
