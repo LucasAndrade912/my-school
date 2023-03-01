@@ -12,6 +12,7 @@ export const Container = styled.TouchableOpacity`
   border: 1px dashed ${colors.white[600]};
   justify-content: center;
   align-items: center;
+  margin-right: 16px;
 `
 
 export const ButtonText = styled.Text`
