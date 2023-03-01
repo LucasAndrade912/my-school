@@ -14,8 +14,10 @@ import { asyncStoreData } from '../utils/asyncStoreData'
 
 WebBrowser.maybeCompleteAuthSession()
 
+type User = { name: string } | null
+
 interface AuthContextProps {
-  user: { name: string }
+  user: User
   isLoading: boolean
   signIn: () => Promise<void>
 }
@@ -27,7 +29,7 @@ interface AuthContextProviderProps {
 export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState({} as { name: string })
+  const [user, setUser] = useState<User>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const [, response, promptAsync] = GoogleProvider.useAuthRequest({
