@@ -8,16 +8,16 @@ import { theme } from '../../theme'
 
 interface HeaderStackProps {
   title: string
-  onResetStates: () => void
   subtitle?: string
+  onResetStates?: () => void
   rightButton?: JSX.Element
 }
 
-export function HeaderStack({ title, onResetStates, subtitle, rightButton }: HeaderStackProps) {
+export function HeaderStack({ title, subtitle, onResetStates, rightButton }: HeaderStackProps) {
   const navigator = useNavigation()
 
   function goBack() {
-    onResetStates()
+    if (onResetStates) onResetStates()
     navigator.goBack()
   }
 

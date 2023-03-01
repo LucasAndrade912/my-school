@@ -67,6 +67,7 @@ export function CreateCourse() {
               color={cardColor}
               icon={icon}
               name={name}
+              pressOpacity={1}
             />
           </View>
 

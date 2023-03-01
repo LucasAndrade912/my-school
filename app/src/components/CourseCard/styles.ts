@@ -4,7 +4,7 @@ import { theme } from '../../theme'
 
 const { colors, radius, shadows, fonts } = theme
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   height: 112px;
   border-radius: ${radius.lg}px;
   padding: 0 24px;

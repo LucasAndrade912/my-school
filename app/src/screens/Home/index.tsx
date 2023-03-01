@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import { Header } from '../../components/Header'
 import { CourseCard } from '../../components/CourseCard'
@@ -7,6 +7,7 @@ import { Background } from '../../components/Background'
 import { CreateCourseButton } from '../../components/CreateCourseButton'
 
 import { api } from '../../lib/api'
+import { useAuth } from '../../hooks/useAuth'
 
 import * as S from './styles'
 
@@ -19,6 +20,12 @@ type CourseRequestData = {
 
 export function Home() {
   const [courses, setCourses] = useState([] as CourseRequestData)
+  const { navigate } = useNavigation()
+  const { user } = useAuth()
+
+  function navigateToCourse(id: string) {
+    navigate('course', { id })
+  }
 
   useFocusEffect(useCallback(() => {
     api.get('/courses')
@@ -29,7 +36,7 @@ export function Home() {
     <Background>
       <S.Container>
         <Header
-          title="Olá, Lucas"
+          title={`Olá, ${user?.name}`}
           subtitle="Boa sorte nas aulas de hoje 😉"
         />
 
@@ -37,7 +44,12 @@ export function Home() {
           <CreateCourseButton />
 
           { courses.map(course => (
-            <CourseCard key={course.id} {...course} marginRight={16} />
+            <CourseCard
+              key={course.id}
+              marginRight={16}
+              onNavigate={() => navigateToCourse(course.name)}
+              {...course}
+            />
           )) }
         </S.Row>
       </S.Container>
