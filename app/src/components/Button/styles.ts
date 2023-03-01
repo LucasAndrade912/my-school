@@ -16,7 +16,7 @@ export const Container = styled.TouchableOpacity.attrs(props => ({
   ...props
 }))`
   opacity: ${props => props.disabled ? 0.7 : 1};
-  padding: 18px 0px;
+  height: 56px;
   justify-content: center;
   align-items: center;
   border-radius: ${radius.lg}px;

@@ -18,7 +18,7 @@ export function Toast({ status, message, onResetStates }: ToastProps) {
   function fadeIn() {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 800,
+      duration: 300,
       useNativeDriver: true
     }).start()
   }
@@ -26,11 +26,11 @@ export function Toast({ status, message, onResetStates }: ToastProps) {
   function fadeOut() {
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 400,
+      duration: 300,
       useNativeDriver: true
     }).start()
 
-    setTimeout(onResetStates, 400)
+    setTimeout(onResetStates, 300)
   }
 
   const isSuccess = status === 'success'
@@ -38,32 +38,33 @@ export function Toast({ status, message, onResetStates }: ToastProps) {
   useEffect(() => {
     fadeIn()
 
-    setTimeout(fadeOut, 3200)
+    setTimeout(fadeOut, 2700)
   }, [])
 
   return (
-    <S.Container
-      style={{
-        borderBottomColor: isSuccess ? theme.colors.blue[900] : theme.colors.red,
-        transform: [{ translateX: 50 }],
-        opacity: fadeAnim
-      }}
-    >
-      <S.Status
-        style={{ backgroundColor: isSuccess ? theme.colors.blue[900] : theme.colors.red }}
+    <S.Center>
+      <S.Container
+        style={{
+          borderBottomColor: isSuccess ? theme.colors.blue[900] : theme.colors.red,
+          opacity: fadeAnim
+        }}
       >
-        { isSuccess ? (
-          <Check size={16} color={theme.colors.white[900]} weight="bold" />
-        ) : (
-          <X size={16} color={theme.colors.white[900]} weight="bold" />
-        ) }
-      </S.Status>
+        <S.Status
+          style={{ backgroundColor: isSuccess ? theme.colors.blue[900] : theme.colors.red }}
+        >
+          { isSuccess ? (
+            <Check size={16} color={theme.colors.white[900]} weight="bold" />
+          ) : (
+            <X size={16} color={theme.colors.white[900]} weight="bold" />
+          ) }
+        </S.Status>
 
-      <S.MessageContainer>
-        <S.Message>
-          { message }
-        </S.Message>
-      </S.MessageContainer>
-    </S.Container>
+        <S.MessageContainer>
+          <S.Message>
+            { message }
+          </S.Message>
+        </S.MessageContainer>
+      </S.Container>
+    </S.Center>
   )
 }

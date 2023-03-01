@@ -1,13 +1,13 @@
 import { TouchableOpacityProps } from 'react-native'
 
-import { Container, Content } from './styles'
+import * as S from './styles'
 
 export function Button({ children, ...props }: TouchableOpacityProps) {
   return (
-    <Container { ...props }>
-      <Content>
+    <S.Container { ...props }>
+      <S.Content>
         { children }
-      </Content>
-    </Container>
+      </S.Content>
+    </S.Container>
   )
 }

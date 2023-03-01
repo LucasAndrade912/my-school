@@ -2,6 +2,10 @@ import { ActivityIndicator } from 'react-native'
 
 import { theme } from '../../theme'
 
-export function Loading() {
-  return <ActivityIndicator size="large" color={theme.colors.white[900]} />
+interface LoadingProps {
+  size?: 'large' | 'small'
+}
+
+export function Loading({ size = 'large' }: LoadingProps) {
+  return <ActivityIndicator size={size} color={theme.colors.white[900]} />
 }

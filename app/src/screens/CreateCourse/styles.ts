@@ -4,7 +4,9 @@ import { theme } from '../../theme'
 
 const { colors, fonts, radius } = theme
 
-export const Container = styled.View`
+export const Container = styled.ScrollView``
+
+export const Content = styled.KeyboardAvoidingView`
   padding: 56px 24px;
 `
 

@@ -2,27 +2,20 @@ import { useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { useToast } from '../../hooks/useToast'
+import * as S from './styles'
 
 import { Button } from '../../components/Button'
+import { Loading } from '../../components/Loading'
 import { Background } from '../../components/Background'
 import { CourseCard } from '../../components/CourseCard'
 import { HeaderStack } from '../../components/HeaderStack'
 
+import { api } from '../../lib/api'
 import { theme } from '../../theme'
-
-import {
-  Container,
-  Label,
-  Input,
-  IconsContainer,
-  Icon,
-  IconContent,
-  Colors,
-  ColorSelector
-} from './styles'
+import { useToast } from '../../hooks/useToast'
 
 export function CreateCourse() {
+  const [isLoading, setIsLoading] = useState(false)
   const [name, setName] = useState('')
   const [icon, setIcon] = useState('📚')
   const [cardColor, setCardColor] = useState(theme.colors.purple)
@@ -36,98 +29,115 @@ export function CreateCourse() {
     setCardColor(theme.colors.purple)
   }
 
-  function createCourse() {
-    if (name.trim() === '') {
-      toast.show('error', 'Ocorreu um erro na criação do curso')
+  async function createCourse() {
+    if (!name.trim()) {
+      toast.show('error', 'Informe o nome do curso')
     } else {
-      navigate('home')
-      toast.show('success', 'Seu curso foi criado com sucesso!')
+      setIsLoading(true)
+
+      try {
+        await api.post('/courses', {
+          name,
+          icon,
+          color:  cardColor
+        })
+
+        navigate('home')
+        toast.show('success', 'Seu curso foi criado com sucesso!')
+      } catch (err) {
+        console.log(err)
+        toast.show('error', 'Ocorreu um erro na criação do curso')
+      } finally {
+        setIsLoading(false)
+      }
     }
   }
 
   return (
     <Background>
-      <Container>
-        <HeaderStack
-          title="Crie um novo curso"
-          onResetStates={resetStates}
-        />
-
-        <View style={{ alignItems: 'center' }}>
-          <CourseCard
-            color={cardColor}
-            icon={icon}
-            name={name}
-          />
-        </View>
-
-        <Colors>
-          <ColorSelector
-            style={{ backgroundColor: theme.colors.blue[700] }}
-            onPress={() => setCardColor(theme.colors.blue[700])}
+      <S.Container>
+        <S.Content behavior="padding">
+          <HeaderStack
+            title="Crie um novo curso"
+            onResetStates={resetStates}
           />
 
-          <ColorSelector
-            style={{ backgroundColor: theme.colors.red }}
-            onPress={() => setCardColor(theme.colors.red)}
-          />
+          <View style={{ alignItems: 'center' }}>
+            <CourseCard
+              color={cardColor}
+              icon={icon}
+              name={name}
+            />
+          </View>
 
-          <ColorSelector
-            style={{ backgroundColor: theme.colors.green }}
-            onPress={() => setCardColor(theme.colors.green)}
-          />
+          <S.Colors>
+            <S.ColorSelector
+              style={{ backgroundColor: theme.colors.blue[700] }}
+              onPress={() => setCardColor(theme.colors.blue[700])}
+            />
 
-          <ColorSelector
-            style={{ backgroundColor: theme.colors.purple, marginRight: 0 }}
-            onPress={() => setCardColor(theme.colors.purple)}
-          />
-        </Colors>
+            <S.ColorSelector
+              style={{ backgroundColor: theme.colors.red }}
+              onPress={() => setCardColor(theme.colors.red)}
+            />
 
-        <Label>
+            <S.ColorSelector
+              style={{ backgroundColor: theme.colors.green }}
+              onPress={() => setCardColor(theme.colors.green)}
+            />
+
+            <S.ColorSelector
+              style={{ backgroundColor: theme.colors.purple, marginRight: 0 }}
+              onPress={() => setCardColor(theme.colors.purple)}
+            />
+          </S.Colors>
+
+          <S.Label>
           Nome do curso
-        </Label>
+          </S.Label>
 
-        <Input
-          placeholder="Informe o nome do curso"
-          placeholderTextColor={theme.colors.white[600]}
-          value={name}
-          onChangeText={text => setName(text)}
-        />
+          <S.Input
+            placeholder="Informe o nome do curso"
+            placeholderTextColor={theme.colors.white[600]}
+            value={name}
+            onChangeText={text => setName(text)}
+          />
 
-        <IconsContainer>
-          <Icon
-            selected={icon === '📚'}
-            onPress={() => setIcon('📚')}
-          >
-            <IconContent>📚</IconContent>
-          </Icon>
+          <S.IconsContainer>
+            <S.Icon
+              selected={icon === '📚'}
+              onPress={() => setIcon('📚')}
+            >
+              <S.IconContent>📚</S.IconContent>
+            </S.Icon>
 
-          <Icon
-            selected={icon === '📏'}
-            onPress={() => setIcon('📏')}
-          >
-            <IconContent>📏</IconContent>
-          </Icon>
+            <S.Icon
+              selected={icon === '📏'}
+              onPress={() => setIcon('📏')}
+            >
+              <S.IconContent>📏</S.IconContent>
+            </S.Icon>
 
-          <Icon
-            selected={icon === '🧪'}
-            onPress={() => setIcon('🧪')}
-          >
-            <IconContent>🧪</IconContent>
-          </Icon>
+            <S.Icon
+              selected={icon === '🧪'}
+              onPress={() => setIcon('🧪')}
+            >
+              <S.IconContent>🧪</S.IconContent>
+            </S.Icon>
 
-          <Icon
-            selected={icon === '✏️'}
-            onPress={() => setIcon('✏️')}
-          >
-            <IconContent>✏️</IconContent>
-          </Icon>
-        </IconsContainer>
+            <S.Icon
+              selected={icon === '✏️'}
+              onPress={() => setIcon('✏️')}
+            >
+              <S.IconContent>✏️</S.IconContent>
+            </S.Icon>
+          </S.IconsContainer>
 
-        <Button onPress={createCourse}>
-          Criar Curso
-        </Button>
-      </Container>
+          <Button onPress={createCourse} disabled={isLoading}>
+            { isLoading ? <Loading size="small" /> : 'Criar Curso' }
+          </Button>
+        </S.Content>
+      </S.Container>
     </Background>
   )
 }

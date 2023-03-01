@@ -5,9 +5,14 @@ import { theme } from '../../theme'
 
 const { colors, fonts, radius, shadows } = theme
 
-export const Container = styled(Animated.View)`
+export const Center = styled.View`
+  width: 100%;
+  align-items: center;
   position: absolute;
   bottom: 100px;
+`
+
+export const Container = styled(Animated.View)`
   flex-direction: row;
   height: 32px;
   padding-right: 8px;

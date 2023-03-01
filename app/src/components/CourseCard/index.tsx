@@ -1,25 +1,22 @@
-import { Text } from 'react-native'
-
-import { Container, Icon, Name } from './styles'
+import * as S from './styles'
 
 interface CourseCardProps {
   color: string
   name: string
   icon: string
+  marginRight?: number
 }
 
-export function CourseCard({ color, icon, name }: CourseCardProps) {
+export function CourseCard({ color, icon, name, marginRight = 0 }: CourseCardProps) {
   return (
-    <Text>
-      <Container style={{ backgroundColor: color }}>
-        <Icon>
-          { icon }
-        </Icon>
+    <S.Container style={{ backgroundColor: color, marginRight }}>
+      <S.Icon>
+        { icon }
+      </S.Icon>
 
-        <Name>
-          { !name ? 'Example' : name }
-        </Name>
-      </Container>
-    </Text>
+      <S.Name>
+        { !name ? 'Example' : name }
+      </S.Name>
+    </S.Container>
   )
 }

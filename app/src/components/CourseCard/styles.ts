@@ -5,8 +5,9 @@ import { theme } from '../../theme'
 const { colors, radius, shadows, fonts } = theme
 
 export const Container = styled.View`
+  height: 112px;
   border-radius: ${radius.lg}px;
-  padding: 24px;
+  padding: 0 24px;
   justify-content: center;
   align-items: center;
   box-shadow: ${shadows.sm.shadow};
