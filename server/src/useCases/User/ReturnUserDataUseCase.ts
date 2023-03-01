@@ -1,11 +1,13 @@
-export class ReturnUserDataUseCase {
-	public async execute() {
-		const userData = {
-			id: 'hello',
-			name: 'Lucas',
-			email: 'lucas@email.com'
-		}
+import { SqlUsersRepositoryInterface } from '../../repositories/User/SqlUsersRepositoryInterface'
 
-		return userData
+export class ReturnUserDataUseCase {
+	constructor(
+    private repository: SqlUsersRepositoryInterface
+	) {}
+
+	public async execute(userId: string) {
+		const user = await this.repository.findById(userId)
+
+		return user
 	}
 }

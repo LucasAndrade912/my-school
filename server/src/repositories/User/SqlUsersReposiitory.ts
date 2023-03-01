@@ -12,6 +12,16 @@ export class SqlUsersRepository implements SqlUsersRepositoryInterface {
 		return newUser
 	}
 
+	public async findById(userId: string) {
+		const user = await prisma.user.findUnique({
+			where: {
+				id: userId
+			}
+		})
+
+		return user
+	}
+
 	public async findByGoogleId(googleId: string) {
 		const user = await prisma.user.findUnique({
 			where: {
