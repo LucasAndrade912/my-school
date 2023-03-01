@@ -13,7 +13,8 @@ export class CreateCourseUseCase {
 	public async execute(ownerId: string, course: Course) {
 		const schema = this.validator.createSchema({
 			name: this.validator.string(),
-			icon: this.validator.string()
+			icon: this.validator.string(),
+			color: this.validator.string()
 		})
 
 		schema.validate(course)

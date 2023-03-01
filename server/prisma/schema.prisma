@@ -22,6 +22,7 @@ model Course {
   id      String  @id @default(uuid())
   name    String
   icon    String
+  color   String
   ownerId String?
 
   classes Class[]

@@ -9,6 +9,7 @@ export class SqlCoursesRepository implements SqlCoursesRepositoryInterface {
 			data: {
 				name: course.name,
 				icon: course.icon,
+				color: course.color,
 				owner: {
 					connect: {
 						id: ownerId
@@ -18,5 +19,17 @@ export class SqlCoursesRepository implements SqlCoursesRepositoryInterface {
 		})
 
 		return newCourse
+	}
+
+	public async findAllCourses(userId: string) {
+		const courses = await prisma.course.findMany({
+			where: {
+				owner: {
+					id: userId
+				}
+			}
+		})
+
+		return courses
 	}
 }
