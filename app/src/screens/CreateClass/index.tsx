@@ -18,13 +18,23 @@ export function CreateClass() {
   const [description, setDescription] = useState('')
   const [weekDaysChecked, setWeekDaysChecked] = useState<number[]>([])
 
-  function toggleCheckedWeekDay(index: number) {
-    if (weekDaysChecked.includes(index)) {
-      setWeekDaysChecked(prevState => prevState.filter(weekDayIndex => weekDayIndex !== index))
-      return
-    }
+  function verifyIfWeekDayHasPassed(weekDay: number) {
+    const today = new Date().getDay()
 
-    setWeekDaysChecked(prevState => [...prevState, index])
+    return today > weekDay
+  }
+
+  function toggleCheckedWeekDay(index: number) {
+    const weekDayHasPassed = verifyIfWeekDayHasPassed(index)
+
+    if (!weekDayHasPassed) {
+      if (weekDaysChecked.includes(index)) {
+        setWeekDaysChecked(prevState => prevState.filter(weekDayIndex => weekDayIndex !== index))
+        return
+      }
+
+      setWeekDaysChecked(prevState => [...prevState, index])
+    }
   }
 
   function createClass() {
@@ -99,7 +109,10 @@ export function CreateClass() {
               key={weekDay}
               activeOpacity={0.7}
               onPress={() => toggleCheckedWeekDay(index)}
-              style={{ marginBottom: index < (weekDays.length - 1) ? 16 : 32 }}
+              style={{
+                marginBottom: index < (weekDays.length - 1) ? 16 : 32,
+                opacity: verifyIfWeekDayHasPassed(index) ? 0.4 : 1
+              }}
             >
               <Checkbox checked={weekDaysChecked.includes(index)} />
 
