@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import * as S from './styles'
 
+import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Loading } from '../../components/Loading'
 import { Background } from '../../components/Background'
@@ -93,13 +94,9 @@ export function CreateCourse() {
             />
           </S.Colors>
 
-          <S.Label>
-          Nome do curso
-          </S.Label>
-
-          <S.Input
+          <Input
+            label="Nome do curso"
             placeholder="Informe o nome do curso"
-            placeholderTextColor={theme.colors.white[600]}
             value={name}
             onChangeText={text => setName(text)}
           />

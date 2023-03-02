@@ -12,7 +12,7 @@ export const Content = styled.KeyboardAvoidingView`
 
 export const Colors = styled.View`
   flex-direction: row;
-  margin-top: 32px;
+  margin: 32px 0;
   justify-content: center;
 `
 
@@ -26,27 +26,10 @@ export const ColorSelector = styled.TouchableOpacity.attrs(props => ({
   margin-right: 32px;
 `
 
-export const Label = styled.Text`
-  font-size: ${fonts.sm.size}px;
-  font-family: ${fonts.sm.font};
-  color: ${colors.white[800]};
-  margin-bottom: 18px;
-  margin-top: 32px;
-`
-
-export const Input = styled.TextInput`
-  padding: 14px 16px;
-  border-radius: ${radius.lg}px;
-  background-color: ${colors.black[800]};
-  font-size: ${fonts['xs'].size}px;
-  font-family: ${fonts['xs'].font};
-  color: ${colors.white[900]};
-  margin-bottom: 24px;
-`
-
 export const IconsContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 24px;
   margin-bottom: 40px;
 `
 
