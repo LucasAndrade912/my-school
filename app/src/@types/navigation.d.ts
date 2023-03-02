@@ -3,9 +3,12 @@ export declare global {
     interface RootParamList {
       home: undefined
       course: {
-        id: string
+        courseId: string
       }
       createCourse: undefined
+      createClass: {
+        courseId: string
+      }
     }
   }
 }

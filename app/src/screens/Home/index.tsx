@@ -24,7 +24,7 @@ export function Home() {
   const { user } = useAuth()
 
   function navigateToCourse(id: string) {
-    navigate('course', { id })
+    navigate('course', { courseId: id })
   }
 
   useFocusEffect(useCallback(() => {

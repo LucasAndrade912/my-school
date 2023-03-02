@@ -66,7 +66,8 @@ export const theme = {
   radius: {
     lg: 14,
     md: 8,
-    sm: 6
+    sm: 6,
+    xs: 3
   },
   shadows: {
     md: {
