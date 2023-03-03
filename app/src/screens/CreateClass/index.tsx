@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Clock } from 'phosphor-react-native'
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
@@ -17,6 +18,23 @@ export function CreateClass() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [weekDaysChecked, setWeekDaysChecked] = useState<number[]>([])
+  const [startDate, setStartDate] = useState<Date | undefined>()
+  const [endDate, setEndDate] = useState<Date | undefined>()
+
+  function getHoursInMinutesFromDate(date: Date) {
+    return (date.getHours() * 60) + date.getMinutes()
+  }
+
+  function showTimePicker(hour: Date | undefined, fn: (date: Date | undefined) => void) {
+    DateTimePickerAndroid.open({
+      value: hour || new Date(),
+      mode: 'time',
+      onChange(event, date) {
+        fn(date)
+      },
+      is24Hour: true
+    })
+  }
 
   function verifyIfWeekDayHasPassed(weekDay: number) {
     const today = new Date().getDay()
@@ -41,7 +59,9 @@ export function CreateClass() {
     console.log({
       title,
       description,
-      weekDaysChecked
+      weekDaysChecked,
+      startTime: getHoursInMinutesFromDate(startDate || new Date()),
+      endTime: getHoursInMinutesFromDate(endDate || new Date())
     })
   }
 
@@ -75,11 +95,13 @@ export function CreateClass() {
               Hora de início
             </S.Label>
 
-            <S.Input>
+            <S.Input
+              onPress={() => showTimePicker(startDate, setStartDate)}
+            >
               <Clock size={14} color={theme.colors.blue[600]} />
 
-              <S.Content>
-                10:00
+              <S.Content style={{ opacity: startDate ? 1 : 0.4 }}>
+                { startDate ? startDate.toLocaleTimeString().slice(0, 5) : '00:00' }
               </S.Content>
             </S.Input>
           </S.HourInput>
@@ -89,11 +111,13 @@ export function CreateClass() {
               Hora de término
             </S.Label>
 
-            <S.Input>
+            <S.Input
+              onPress={() => showTimePicker(endDate, setEndDate)}
+            >
               <Clock size={14} color={theme.colors.blue[600]} />
 
-              <S.Content>
-                12:00
+              <S.Content style={{ opacity: endDate ? 1 : 0.4 }}>
+                { endDate ? endDate.toLocaleTimeString().slice(0, 5) : '00:00' }
               </S.Content>
             </S.Input>
           </S.HourInput>
