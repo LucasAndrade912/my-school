@@ -32,11 +32,11 @@ model Course {
 }
 
 model Class {
-  id          String   @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String?
-  hourStart   DateTime
-  hourEnd     DateTime
+  startTime   Int
+  endTime     Int
   assisted    Boolean
   courseId    String?
 
