@@ -11,7 +11,7 @@ export class CreateUserUseCase {
 
 	public async execute(accessToken: string) {
 		const schema = this.validator.createSchema({
-			accessToken: this.validator.types.string()
+			accessToken: this.validator.string()
 		})
 
 		schema.validate({ accessToken })
