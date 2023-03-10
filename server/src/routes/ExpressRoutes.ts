@@ -8,6 +8,8 @@ import { ReturnUserDataController } from '../controllers/User/ReturnUserDataCont
 import { CreateCourseController } from '../controllers/Course/CreateCourseController'
 import { GetAllCoursesController } from '../controllers/Course/GetAllCoursesController'
 
+import { CreateClassController } from '../controllers/Class/CreateClassController'
+
 export class ExpressRoutes {
 	private routes: Router
 
@@ -27,6 +29,10 @@ export class ExpressRoutes {
 		router.post('/courses',
 			AuthMiddleware.handle,
 			CreateCourseController.handle
+		)
+		router.post('/courses/:id/classes',
+			AuthMiddleware.handle,
+			CreateClassController.handle
 		)
 
 		this.routes = router
