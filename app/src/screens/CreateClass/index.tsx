@@ -29,6 +29,7 @@ type RouteParams = {
 }
 
 export function CreateClass() {
+  const [isLoading, setIsLoading] = useState(false)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [weekDaysChecked, setWeekDaysChecked] = useState<number[]>([])
@@ -111,6 +112,8 @@ export function CreateClass() {
     const endTime = getHoursInMinutesFromDate(endDate || new Date())
 
     if (validateData({ title, weekDays: weekDaysChecked, startTime, endTime })) {
+      setIsLoading(true)
+
       try {
         await api.post(`/courses/${courseId}/classes`, {
           name: title.trim(),
@@ -125,6 +128,7 @@ export function CreateClass() {
         console.log(err)
         toast.show('error', 'Erro na criação da aula, tente novamente')
       } finally {
+        setIsLoading(false)
         navigate('home')
       }
     }
@@ -212,7 +216,7 @@ export function CreateClass() {
           )) }
         </>
 
-        <Button onPress={createClass}>
+        <Button onPress={createClass} loading={isLoading}>
           Criar nova aula
         </Button>
       </S.Container>

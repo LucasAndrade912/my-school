@@ -6,7 +6,6 @@ import * as S from './styles'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-import { Loading } from '../../components/Loading'
 import { Background } from '../../components/Background'
 import { CourseCard } from '../../components/CourseCard'
 import { HeaderStack } from '../../components/HeaderStack'
@@ -131,8 +130,8 @@ export function CreateCourse() {
             </S.Icon>
           </S.IconsContainer>
 
-          <Button onPress={createCourse} disabled={isLoading}>
-            { isLoading ? <Loading size="small" /> : 'Criar Curso' }
+          <Button onPress={createCourse} loading={isLoading}>
+            Criar Curso
           </Button>
         </S.Content>
       </S.Container>
