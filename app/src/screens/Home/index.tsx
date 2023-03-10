@@ -47,7 +47,7 @@ export function Home() {
             <CourseCard
               key={course.id}
               marginRight={16}
-              onNavigate={() => navigateToCourse(course.name)}
+              onNavigate={() => navigateToCourse(course.id)}
               {...course}
             />
           )) }

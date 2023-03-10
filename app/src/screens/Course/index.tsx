@@ -7,11 +7,11 @@ import { CreateClassButton } from '../../components/CreateClassButton'
 import * as S from './styles'
 
 interface RouteParams {
-  id: string
+  courseId: string
 }
 
 export function Course() {
-  const { id } = useRoute().params as RouteParams
+  const { courseId } = useRoute().params as RouteParams
 
   return (
     <Background>
@@ -19,7 +19,7 @@ export function Course() {
         <HeaderStack
           title={'Você está no curso de Matemática'}
           subtitle="Foco nas aulas!!!"
-          rightButton={<CreateClassButton courseId={id} />}
+          rightButton={<CreateClassButton courseId={courseId} />}
         />
       </S.Container>
     </Background>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Clock } from 'phosphor-react-native'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 
 import { Input } from '../../components/Input'
@@ -9,10 +10,23 @@ import { Background } from '../../components/Background'
 import { HeaderStack } from '../../components/HeaderStack'
 
 import { theme } from '../../theme'
+import { api } from '../../lib/api'
+import { useToast } from '../../hooks/useToast'
 
 import * as S from './styles'
 
 const weekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
+
+type DataToValidate = {
+  title: string
+  weekDays: number[]
+  startTime: number
+  endTime: number
+}
+
+type RouteParams = {
+  courseId: string
+}
 
 export function CreateClass() {
   const [title, setTitle] = useState('')
@@ -20,6 +34,10 @@ export function CreateClass() {
   const [weekDaysChecked, setWeekDaysChecked] = useState<number[]>([])
   const [startDate, setStartDate] = useState<Date | undefined>()
   const [endDate, setEndDate] = useState<Date | undefined>()
+
+  const { courseId } = useRoute().params as RouteParams
+  const { navigate } = useNavigation()
+  const toast = useToast()
 
   function getHoursInMinutesFromDate(date: Date) {
     return (date.getHours() * 60) + date.getMinutes()
@@ -55,14 +73,61 @@ export function CreateClass() {
     }
   }
 
-  function createClass() {
-    console.log({
-      title,
-      description,
-      weekDaysChecked,
-      startTime: getHoursInMinutesFromDate(startDate || new Date()),
-      endTime: getHoursInMinutesFromDate(endDate || new Date())
-    })
+  function validateData(data: DataToValidate) {
+    let status = 'success'
+
+    if (data.title.trim() === '') {
+      toast.show('error', 'Informe o título da aula')
+      status = 'error'
+    }
+
+    if (!data.startTime || !data.endTime) {
+      toast.show('error', 'Informe o tempo de duração da aula')
+      status = 'error'
+    } else if (data.endTime < data.startTime) {
+      toast.show('error', 'Formato de hora inválida')
+      status = 'error'
+    } else if ((data.endTime - data.startTime) < 15) {
+      toast.show('error', 'Tempo mínimo de duração é de 15 minutos')
+      status = 'error'
+    }
+
+    for (const weekDay of data.weekDays) {
+      const hasPassed = verifyIfWeekDayHasPassed(weekDay)
+      if (hasPassed) {
+        status = 'error'
+        toast.show('error', 'O dia da semana selecionado já passou')
+        break
+      }
+    }
+
+    if (status === 'error') return false
+
+    return true
+  }
+
+  async function createClass() {
+    const startTime = getHoursInMinutesFromDate(startDate || new Date())
+    const endTime = getHoursInMinutesFromDate(endDate || new Date())
+
+    if (validateData({ title, weekDays: weekDaysChecked, startTime, endTime })) {
+      try {
+        await api.post(`/courses/${courseId}/classes`, {
+          name: title.trim(),
+          description: description.trim(),
+          startTime,
+          endTime,
+          weekDays: weekDaysChecked
+        })
+
+        toast.show('success', 'Aula criada com sucesso!')
+      } catch (err) {
+        console.log(err)
+        toast.show('error', 'Erro na criação da aula, tente novamente')
+      } finally {
+        navigate('home')
+      }
+    }
   }
 
   return (
