@@ -1,15 +1,19 @@
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { JsonWebTokenAdapter } from '../../adapters/JsonWebTokenAdapter'
-import { SqlUsersRepositoryInterface } from '../../repositories/User/SqlUsersRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/Sql/User/UsersRepositoryInterface'
+
+interface CreateUserUseCaseRequest {
+  accessToken: string
+}
 
 export class CreateUserUseCase {
 	constructor (
-    private repository: SqlUsersRepositoryInterface,
+    private repository: UsersRepositoryInterface,
     private jwt: JsonWebTokenAdapter,
     private validator: ValidatorAdapter
 	) {}
 
-	public async execute(accessToken: string) {
+	public async execute({ accessToken }: CreateUserUseCaseRequest) {
 		const schema = this.validator.createSchema({
 			accessToken: this.validator.string()
 		})

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
-import { SqlUsersRepository } from '../../repositories/User/SqlUsersReposiitory'
+import { UsersRepository } from '../../repositories/Sql/User/UsersReposiitory'
 import { ReturnUserDataUseCase } from '../../useCases/User/ReturnUserDataUseCase'
 
 export class ReturnUserDataController {
 	static async handle(req: Request, res: Response) {
-		const repository = new SqlUsersRepository()
+		const repository = new UsersRepository()
 		const returnUserDataUseCase = new ReturnUserDataUseCase(repository)
 
 		try {

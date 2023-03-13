@@ -1,8 +1,8 @@
-import { SqlUsersRepositoryInterface } from '../../repositories/User/SqlUsersRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/Sql/User/UsersRepositoryInterface'
 
 export class ReturnUserDataUseCase {
 	constructor(
-    private repository: SqlUsersRepositoryInterface
+    private repository: UsersRepositoryInterface
 	) {}
 
 	public async execute(userId: string) {

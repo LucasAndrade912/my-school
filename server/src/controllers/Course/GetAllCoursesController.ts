@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
 import { GetAllCoursesUseCase } from '../../useCases/Course/GetAllCoursesUseCase'
-import { SqlCoursesRepository } from '../../repositories/Course/SqlCoursesRepository'
+import { CoursesRepository } from '../../repositories/Sql/Course/CoursesRepository'
 
 export class GetAllCoursesController {
 	static async handle(req: Request, res: Response) {
-		const repository = new SqlCoursesRepository()
+		const repository = new CoursesRepository()
 		const getAllCoursesUseCase = new GetAllCoursesUseCase(repository)
 
 		try {

@@ -1,9 +1,9 @@
-import { SqlCoursesRepositoryInterface } from '../../repositories/Course/SqlCoursesRepositoryInterface'
+import { CoursesRepositoryInterface } from '../../repositories/Sql/Course/CoursesRepositoryInterface'
 
 
 export class GetAllCoursesUseCase {
 	constructor(
-    private repository: SqlCoursesRepositoryInterface
+    private repository: CoursesRepositoryInterface
 	) {}
 
 	public async execute(userId: string) {

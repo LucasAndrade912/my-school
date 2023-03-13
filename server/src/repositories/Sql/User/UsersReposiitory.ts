@@ -1,9 +1,9 @@
 import { prisma } from '../prisma'
 
-import { User } from '../../types/User'
-import { SqlUsersRepositoryInterface } from './SqlUsersRepositoryInterface'
+import { User } from '../../../types/User'
+import { UsersRepositoryInterface } from './UsersRepositoryInterface'
 
-export class SqlUsersRepository implements SqlUsersRepositoryInterface {
+export class UsersRepository implements UsersRepositoryInterface {
 	public async insert(user: User) {
 		const newUser = await prisma.user.create({
 			data: user

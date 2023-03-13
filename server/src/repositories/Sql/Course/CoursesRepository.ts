@@ -1,9 +1,9 @@
 import { prisma } from '../prisma'
 
-import { Course } from '../../types/Course'
-import { SqlCoursesRepositoryInterface } from './SqlCoursesRepositoryInterface'
+import { Course } from '../../../types/Course'
+import { CoursesRepositoryInterface } from './CoursesRepositoryInterface'
 
-export class SqlCoursesRepository implements SqlCoursesRepositoryInterface {
+export class CoursesRepository implements CoursesRepositoryInterface {
 	public async insert(ownerId: string, course: Course) {
 		const newCourse = await prisma.course.create({
 			data: {

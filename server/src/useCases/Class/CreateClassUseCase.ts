@@ -1,15 +1,20 @@
 import { Class } from '../../types/Class'
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { verifyIfWeekDayHasPassed } from '../../utils/verifyIfWeekDayHasPassed'
-import { SqlClassRepositoryInterface } from '../../repositories/Class/SqlClassRepositoryInterface'
+import { ClassesRepositoryInterface } from '../../repositories/Sql/Class/ClassesRepositoryInterface'
+
+interface CreateClassUseCaseRequest {
+  courseId: string
+  data: Class
+}
 
 export class CreateClassUseCase {
 	constructor(
-    private repository: SqlClassRepositoryInterface,
+    private repository: ClassesRepositoryInterface,
     private validator: ValidatorAdapter
 	) {}
 
-	public async execute(courseId: string, data: Class) {
+	public async execute({ courseId, data }: CreateClassUseCaseRequest) {
 		const schema = this.validator.createSchema({
 			name: this.validator.string(),
 			description: this.validator.string({ nullable: true }),

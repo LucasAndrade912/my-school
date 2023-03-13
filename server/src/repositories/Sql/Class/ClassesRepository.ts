@@ -1,10 +1,10 @@
 import { prisma } from '../prisma'
-import { Class } from '../../types/Class'
-import { getDateFromWeekDay } from '../../utils/getDateFromWeekDay'
+import { Class } from '../../../types/Class'
+import { getDateFromWeekDay } from '../../../utils/getDateFromWeekDay'
 
-import { SqlClassRepositoryInterface } from './SqlClassRepositoryInterface'
+import { ClassesRepositoryInterface } from './ClassesRepositoryInterface'
 
-export class SqlClassRepository implements SqlClassRepositoryInterface {
+export class ClassesRepository implements ClassesRepositoryInterface {
 	public async insert(courseId: string, data: Class) {
 		const clas = await prisma.class.create({
 			data: {

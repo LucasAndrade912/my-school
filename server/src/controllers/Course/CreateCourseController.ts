@@ -2,16 +2,16 @@ import { Request, Response } from 'express'
 
 import { ZodAdapter } from '../../adapters/ZodAdapter'
 import { CreateCourseUseCase } from '../../useCases/Course/CreateCourseUseCase'
-import { SqlCoursesRepository } from '../../repositories/Course/SqlCoursesRepository'
+import { CoursesRepository } from '../../repositories/Sql/Course/CoursesRepository'
 
 export class CreateCourseController {
 	static async handle(req: Request, res: Response) {
-		const repository = new SqlCoursesRepository()
+		const repository = new CoursesRepository()
 		const zod = new ZodAdapter()
 		const createCourseUseCase = new CreateCourseUseCase(repository, zod)
 
 		try {
-			await createCourseUseCase.execute(req.sub, req.body)
+			await createCourseUseCase.execute({ ownerId: req.sub, data: req.body })
 
 			return res.status(201).send()
 		} catch (err) {
