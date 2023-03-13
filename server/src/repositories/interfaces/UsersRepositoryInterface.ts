@@ -1,4 +1,4 @@
-import { User } from '../../../types/User'
+import { User } from '../../types/User'
 
 export interface UsersRepositoryInterface {
   insert: (user: User) => Promise<User & { id: string }>

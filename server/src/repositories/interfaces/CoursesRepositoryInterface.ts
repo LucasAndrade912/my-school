@@ -1,4 +1,4 @@
-import { Course } from '../../../types/Course'
+import { Course } from '../../types/Course'
 
 export interface CoursesRepositoryInterface {
   insert: (ownerId: string, course: Course) => Promise<Course>

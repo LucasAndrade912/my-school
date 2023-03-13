@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import { GetAllCoursesUseCase } from '../../useCases/Course/GetAllCoursesUseCase'
-import { CoursesRepository } from '../../repositories/Sql/Course/CoursesRepository'
+import { CoursesRepository } from '../../repositories/Sql/CoursesRepository'
 
 export class GetAllCoursesController {
 	static async handle(req: Request, res: Response) {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import { ZodAdapter } from '../../adapters/ZodAdapter'
-import { ClassesRepository } from '../../repositories/Sql/Class/ClassesRepository'
+import { ClassesRepository } from '../../repositories/Sql/ClassesRepository'
 import { CreateClassUseCase } from '../../useCases/Class/CreateClassUseCase'
 
 export class CreateClassController {

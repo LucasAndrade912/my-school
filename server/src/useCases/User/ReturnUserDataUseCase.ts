@@ -1,4 +1,4 @@
-import { UsersRepositoryInterface } from '../../repositories/Sql/User/UsersRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepositoryInterface'
 
 export class ReturnUserDataUseCase {
 	constructor(

@@ -1,8 +1,8 @@
-import { prisma } from '../prisma'
-import { Class } from '../../../types/Class'
-import { getDateFromWeekDay } from '../../../utils/getDateFromWeekDay'
+import { prisma } from './prisma'
+import { Class } from '../../types/Class'
+import { getDateFromWeekDay } from '../../utils/getDateFromWeekDay'
 
-import { ClassesRepositoryInterface } from './ClassesRepositoryInterface'
+import { ClassesRepositoryInterface } from '../interfaces/ClassesRepositoryInterface'
 
 export class ClassesRepository implements ClassesRepositoryInterface {
 	public async insert(courseId: string, data: Class) {

@@ -1,7 +1,7 @@
-import { prisma } from '../prisma'
+import { prisma } from './prisma'
 
-import { User } from '../../../types/User'
-import { UsersRepositoryInterface } from './UsersRepositoryInterface'
+import { User } from '../../types/User'
+import { UsersRepositoryInterface } from '../interfaces/UsersRepositoryInterface'
 
 export class UsersRepository implements UsersRepositoryInterface {
 	public async insert(user: User) {

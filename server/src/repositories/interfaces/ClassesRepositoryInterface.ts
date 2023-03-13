@@ -1,4 +1,4 @@
-import { Class } from '../../../types/Class'
+import { Class } from '../../types/Class'
 
 type Classes = Array<Omit<Class, 'weekDays'> & { id: string }>
 

@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { ZodAdapter } from '../../adapters/ZodAdapter'
 import { CreateCourseUseCase } from '../../useCases/Course/CreateCourseUseCase'
-import { CoursesRepository } from '../../repositories/Sql/Course/CoursesRepository'
+import { CoursesRepository } from '../../repositories/Sql/CoursesRepository'
 
 export class CreateCourseController {
 	static async handle(req: Request, res: Response) {

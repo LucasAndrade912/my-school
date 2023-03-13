@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { JWTAdapter } from '../../adapters/JwtAdapter'
 import { ZodAdapter } from '../../adapters/ZodAdapter'
-import { UsersRepository } from '../../repositories/Sql/User/UsersReposiitory'
+import { UsersRepository } from '../../repositories/Sql/UsersReposiitory'
 
 import { CreateUserUseCase } from '../../useCases/User/CreateUserUseCase'
 

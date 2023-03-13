@@ -1,7 +1,7 @@
 import { Course } from '../../types/Course'
 
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
-import { CoursesRepositoryInterface } from '../../repositories/Sql/Course/CoursesRepositoryInterface'
+import { CoursesRepositoryInterface } from '../../repositories/interfaces/CoursesRepositoryInterface'
 
 interface CreateCourseUseCaseRequest {
   ownerId: string

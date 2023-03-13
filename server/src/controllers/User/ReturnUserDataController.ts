@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { UsersRepository } from '../../repositories/Sql/User/UsersReposiitory'
+import { UsersRepository } from '../../repositories/Sql/UsersReposiitory'
 import { ReturnUserDataUseCase } from '../../useCases/User/ReturnUserDataUseCase'
 
 export class ReturnUserDataController {

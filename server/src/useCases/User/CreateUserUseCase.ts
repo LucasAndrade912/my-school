@@ -1,6 +1,6 @@
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { JsonWebTokenAdapter } from '../../adapters/JsonWebTokenAdapter'
-import { UsersRepositoryInterface } from '../../repositories/Sql/User/UsersRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepositoryInterface'
 
 interface CreateUserUseCaseRequest {
   accessToken: string

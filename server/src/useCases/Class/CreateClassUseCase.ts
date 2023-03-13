@@ -1,7 +1,7 @@
 import { Class } from '../../types/Class'
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { verifyIfWeekDayHasPassed } from '../../utils/verifyIfWeekDayHasPassed'
-import { ClassesRepositoryInterface } from '../../repositories/Sql/Class/ClassesRepositoryInterface'
+import { ClassesRepositoryInterface } from '../../repositories/interfaces/ClassesRepositoryInterface'
 
 interface CreateClassUseCaseRequest {
   courseId: string

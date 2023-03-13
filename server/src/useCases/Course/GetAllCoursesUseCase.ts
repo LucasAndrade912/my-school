@@ -1,4 +1,4 @@
-import { CoursesRepositoryInterface } from '../../repositories/Sql/Course/CoursesRepositoryInterface'
+import { CoursesRepositoryInterface } from '../../repositories/interfaces/CoursesRepositoryInterface'
 
 
 export class GetAllCoursesUseCase {

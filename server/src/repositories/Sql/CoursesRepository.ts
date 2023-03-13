@@ -1,7 +1,7 @@
-import { prisma } from '../prisma'
+import { prisma } from './prisma'
 
-import { Course } from '../../../types/Course'
-import { CoursesRepositoryInterface } from './CoursesRepositoryInterface'
+import { Course } from '../../types/Course'
+import { CoursesRepositoryInterface } from '../interfaces/CoursesRepositoryInterface'
 
 export class CoursesRepository implements CoursesRepositoryInterface {
 	public async insert(ownerId: string, course: Course) {
