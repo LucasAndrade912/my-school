@@ -5,7 +5,7 @@ import { CoursesRepositoryInterface } from '../interfaces/CoursesRepositoryInter
 
 export class CoursesRepository implements CoursesRepositoryInterface {
 	public async insert(ownerId: string, course: Course) {
-		const newCourse = await prisma.course.create({
+		await prisma.course.create({
 			data: {
 				name: course.name,
 				icon: course.icon,
@@ -17,8 +17,6 @@ export class CoursesRepository implements CoursesRepositoryInterface {
 				}
 			},
 		})
-
-		return newCourse
 	}
 
 	public async findAllCourses(userId: string) {
