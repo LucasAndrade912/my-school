@@ -6,8 +6,16 @@ export class ReturnUserDataUseCase {
 	) {}
 
 	public async execute(userId: string) {
-		const user = await this.repository.findById(userId)
+		try {
+			const user = await this.repository.findById(userId)
 
-		return user
+			if (!user) throw new Error('User not exists')
+
+			return user
+		} catch (err) {
+			if (err instanceof Error) console.log('Cause ->', err.cause ?? err.message)
+
+			throw err
+		}
 	}
 }
