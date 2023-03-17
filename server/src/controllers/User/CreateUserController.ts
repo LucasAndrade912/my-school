@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { JWTAdapter } from '../../adapters/JwtAdapter'
 import { ZodAdapter } from '../../adapters/ZodAdapter'
 import { UsersRepository } from '../../repositories/Sql/UsersReposiitory'
+import { OAuthGoogleService } from '../../services/auth/OAuthGoogleService'
 
 import { CreateUserUseCase } from '../../useCases/User/CreateUserUseCase'
 
@@ -12,7 +13,8 @@ export class CreateUserController {
 			const repository = new UsersRepository()
 			const jwt = new JWTAdapter()
 			const zod = new ZodAdapter()
-			const createUserUseCase = new CreateUserUseCase(repository, jwt, zod)
+			const oauthGoogleService = new OAuthGoogleService()
+			const createUserUseCase = new CreateUserUseCase(repository, jwt, zod, oauthGoogleService)
 
 			const data = await createUserUseCase.execute({ accessToken: req.body.accessToken })
 

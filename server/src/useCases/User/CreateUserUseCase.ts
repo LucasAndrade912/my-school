@@ -1,5 +1,6 @@
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { JsonWebTokenAdapter } from '../../adapters/JsonWebTokenAdapter'
+import { OAuthGoogleInterface } from '../../services/auth/OAuthGoogleInterface'
 import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepositoryInterface'
 
 interface CreateUserUseCaseRequest {
@@ -10,7 +11,8 @@ export class CreateUserUseCase {
 	constructor (
     private repository: UsersRepositoryInterface,
     private jwt: JsonWebTokenAdapter,
-    private validator: ValidatorAdapter
+    private validator: ValidatorAdapter,
+    private googleOAuthService: OAuthGoogleInterface
 	) {}
 
 	public async execute({ accessToken }: CreateUserUseCaseRequest) {
@@ -20,17 +22,7 @@ export class CreateUserUseCase {
 
 		schema.validate({ accessToken })
 
-		const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-			headers: {
-				Authorization: `Bearer ${accessToken}`
-			}
-		})
-
-		const user = await response.json() as {
-      id: string,
-      name: string,
-      email: string
-    }
+		const user = await this.googleOAuthService.execute(accessToken)
 
 		let userInfo = await this.repository.findByGoogleId(user.id)
 
