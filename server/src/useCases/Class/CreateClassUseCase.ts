@@ -80,7 +80,7 @@ export class CreateClassUseCase {
 
 			await this.repository.insert(courseId, { ...data, assisted: false })
 		} catch (err) {
-			if (err instanceof Error) console.log('Cause ->', err.cause)
+			if (err instanceof Error) console.log('Cause ->', err.cause ?? err.message)
 
 			throw err
 		}
