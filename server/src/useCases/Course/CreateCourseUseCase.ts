@@ -1,11 +1,13 @@
-import { Course } from '../../types/Course'
-
 import { ValidatorAdapter } from '../../adapters/ValidatorAdapter'
 import { CoursesRepositoryInterface } from '../../repositories/interfaces/CoursesRepositoryInterface'
 
 interface CreateCourseUseCaseRequest {
   ownerId: string
-  data: Course
+  data: {
+    name: string
+    color?: string
+    icon?: string
+  }
 }
 
 export class CreateCourseUseCase {
@@ -16,13 +18,15 @@ export class CreateCourseUseCase {
 
 	public async execute({ ownerId, data }: CreateCourseUseCaseRequest) {
 		const schema = this.validator.createSchema({
-			name: this.validator.string(),
-			icon: this.validator.string(),
-			color: this.validator.string()
+			name: this.validator.string()
 		})
 
 		schema.validate(data)
 
-		await this.repository.insert(ownerId, data)
+		await this.repository.insert(ownerId, {
+			name: data.name,
+			color: data.color ?? '#7353BA',
+			icon: data.icon ?? '📚'
+		})
 	}
 }
