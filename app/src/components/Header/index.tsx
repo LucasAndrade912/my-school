@@ -1,4 +1,4 @@
-import { Title, SubTitle } from './styles'
+import * as S from './styles'
 
 interface HeaderProps {
   title: string
@@ -8,13 +8,13 @@ interface HeaderProps {
 export function Header({ title, subtitle }: HeaderProps) {
   return (
     <>
-      <Title>
+      <S.Title>
         { title }
-      </Title>
+      </S.Title>
 
-      <SubTitle>
+      <S.SubTitle>
         { subtitle }
-      </SubTitle>
+      </S.SubTitle>
     </>
   )
 }

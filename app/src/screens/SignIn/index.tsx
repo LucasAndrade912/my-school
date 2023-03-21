@@ -4,45 +4,38 @@ import { useAuth } from '../../hooks/useAuth'
 import { Loading } from '../../components/Loading'
 import { Background } from '../../components/Background'
 
-import {
-  Container,
-  Title,
-  SubTitle,
-  SignInButton,
-  SignInButtonText,
-  SignInButtonIcon
-} from './styles'
+import * as S from './styles'
 
 export function SignIn() {
   const { isLoading, signIn } = useAuth()
 
   return (
     <Background>
-      <Container source={BackgroundIcons}>
-        <Title>
-        Bem-vindo ao MySchool
-        </Title>
+      <S.Container source={BackgroundIcons}>
+        <S.Title>
+          Bem-vindo ao MySchool
+        </S.Title>
 
-        <SubTitle>
-        O app que vai te ajudar a focar nos estudos
-        </SubTitle>
+        <S.SubTitle>
+          O app que vai te ajudar a focar nos estudos
+        </S.SubTitle>
 
-        <SignInButton activeOpacity={0.7} onPress={signIn} disabled={isLoading}>
+        <S.SignInButton activeOpacity={0.7} onPress={signIn} disabled={isLoading}>
           {
             isLoading
               ? <Loading />
               : (
                 <>
-                  <SignInButtonIcon name="google" />
+                  <S.SignInButtonIcon name="google" />
 
-                  <SignInButtonText>
-                  Entrar com o Google
-                  </SignInButtonText>
+                  <S.SignInButtonText>
+                    Entrar com o Google
+                  </S.SignInButtonText>
                 </>
               )
           }
-        </SignInButton>
-      </Container>
+        </S.SignInButton>
+      </S.Container>
     </Background>
   )
 }

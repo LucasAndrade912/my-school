@@ -1,11 +1,11 @@
 import { ViewProps } from 'react-native'
 
-import { Container } from './styles'
+import * as S from './styles'
 
 export function Background({ children, ...props }: ViewProps) {
   return (
-    <Container { ...props }>
+    <S.Container { ...props }>
       { children }
-    </Container>
+    </S.Container>
   )
 }

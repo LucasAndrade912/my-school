@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native'
 import Icon from '@expo/vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 
-import { Container, Title, SubTitle, Header } from './styles'
+import * as S from './styles'
 
 import { theme } from '../../theme'
 
@@ -22,8 +22,8 @@ export function HeaderStack({ title, subtitle, onResetStates, rightButton }: Hea
   }
 
   return (
-    <Container>
-      <Header>
+    <S.Container>
+      <S.Header>
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={goBack}
@@ -32,17 +32,17 @@ export function HeaderStack({ title, subtitle, onResetStates, rightButton }: Hea
         </TouchableOpacity>
 
         { rightButton }
-      </Header>
+      </S.Header>
 
-      <Title>
+      <S.Title>
         { title }
-      </Title>
+      </S.Title>
 
       { subtitle && (
-        <SubTitle>
+        <S.SubTitle>
           { subtitle }
-        </SubTitle>
+        </S.SubTitle>
       ) }
-    </Container>
+    </S.Container>
   )
 }
