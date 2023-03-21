@@ -10,7 +10,7 @@ import * as AuthSession from 'expo-auth-session'
 import * as GoogleProvider from 'expo-auth-session/providers/google'
 
 import { api } from '../lib/api'
-import { asyncStoreData } from '../utils/asyncStoreData'
+import { useAsyncStorage } from '../hooks/useAsyncStorage'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -31,6 +31,8 @@ export const AuthContext = createContext({} as AuthContextProps)
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User>(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  const asyncStorage = useAsyncStorage()
 
   const [, response, promptAsync] = GoogleProvider.useAuthRequest({
     clientId: CLIENT_ID,
@@ -57,7 +59,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     try {
       const { data } = await api.post('/users', { accessToken })
       api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
-      await asyncStoreData('@token', data.token)
+      await asyncStorage.storeData('@token', data.token)
 
       const userData = await api.get('/me')
       setUser(userData.data)

@@ -18,7 +18,7 @@ import { AuthContextProvider } from './src/context/AuthContext'
 
 import { theme } from './src/theme'
 import { api } from './src/lib/api'
-import { asyncGetData } from './src/utils/asyncGetData'
+import { useAsyncStorage } from './src/hooks/useAsyncStorage'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -30,9 +30,11 @@ export default function App() {
     Rubik_700Bold
   })
 
+  const asyncStorage = useAsyncStorage()
+
   const onLayoutRootView = useCallback(async () => {
     if (isFontsLoaded) {
-      const token = await asyncGetData('@token')
+      const token = await asyncStorage.getData('@token')
       if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
       await SplashScreen.hideAsync()
