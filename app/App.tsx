@@ -7,6 +7,7 @@ import {
   Rubik_600SemiBold,
   Rubik_700Bold
 } from '@expo-google-fonts/rubik'
+import { ThemeProvider } from 'styled-components'
 import { NavigationContainer } from '@react-navigation/native'
 import * as SplashScreen from 'expo-splash-screen'
 
@@ -15,6 +16,7 @@ import { Background } from './src/components/Background'
 import { ToastProvider } from './src/context/ToastContext'
 import { AuthContextProvider } from './src/context/AuthContext'
 
+import { theme } from './src/theme'
 import { api } from './src/lib/api'
 import { asyncGetData } from './src/utils/asyncGetData'
 
@@ -43,14 +45,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AuthContextProvider>
-        <ToastProvider>
-          <Background onLayout={onLayoutRootView}>
-            <AppRoutes />
-            <StatusBar style="light" translucent />
-          </Background>
-        </ToastProvider>
-      </AuthContextProvider>
+      <ThemeProvider theme={theme}>
+        <AuthContextProvider>
+          <ToastProvider>
+            <Background onLayout={onLayoutRootView}>
+              <AppRoutes />
+              <StatusBar style="light" translucent />
+            </Background>
+          </ToastProvider>
+        </AuthContextProvider>
+      </ThemeProvider>
     </NavigationContainer>
   )
 }
