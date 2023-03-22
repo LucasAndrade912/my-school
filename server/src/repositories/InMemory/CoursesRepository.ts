@@ -3,10 +3,12 @@ import { randomUUID } from 'node:crypto'
 import { Course } from '../../types/Course'
 import { CoursesRepositoryInterface } from '../interfaces/CoursesRepositoryInterface'
 
+export const fakeUserIdForTests = 'default-user-for-tests'
+
 export class CoursesRepository implements CoursesRepositoryInterface {
 	private db = [
 		{
-			id: 'default-user-for-tests',
+			id: fakeUserIdForTests,
 			courses: [
 				{
 					id: '1',
@@ -24,7 +26,7 @@ export class CoursesRepository implements CoursesRepositoryInterface {
 		}
 	]
 
-	async insert(ownerId: string, course: Course) {
+	public async insert(ownerId: string, course: Course) {
 		const user = this.db.find(user => user.id === ownerId)
 
 		if (!user) {
@@ -37,7 +39,18 @@ export class CoursesRepository implements CoursesRepositoryInterface {
 		})
 	}
 
-	async findAllCourses(userId: string) {
+	public async findCourse(ownerId: string, courseId: string) {
+		const user = this.db.find(user => user.id === ownerId)
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		const course = user.courses.find(course => course.id === courseId)
+		return course
+	}
+
+	public async findAllCourses(userId: string) {
 		const user = this.db.find(user => user.id === userId)
 
 		if (!user) {

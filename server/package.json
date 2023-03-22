@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "tsx watch src/app.ts",
     "test": "jest",
-    "test:watch": "jest --watchAll --verbose"
+    "test:watch": "jest --watchAll --verbose --silent"
   },
   "keywords": [],
   "author": "",
