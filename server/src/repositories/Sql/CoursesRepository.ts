@@ -19,6 +19,14 @@ export class CoursesRepository implements CoursesRepositoryInterface {
 		})
 	}
 
+	public async findCourse(ownerId: string, courseId: string) {
+		const course = await prisma.course.findFirst({
+			where: { id: courseId, ownerId }
+		})
+
+		return course
+	}
+
 	public async findAllCourses(userId: string) {
 		const courses = await prisma.course.findMany({
 			where: {

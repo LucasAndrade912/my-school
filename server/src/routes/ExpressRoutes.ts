@@ -7,6 +7,7 @@ import { ReturnUserDataController } from '../controllers/User/ReturnUserDataCont
 
 import { CreateCourseController } from '../controllers/Course/CreateCourseController'
 import { GetAllCoursesController } from '../controllers/Course/GetAllCoursesController'
+import { GetCourseController } from '../controllers/Course/GetCourseController'
 
 import { CreateClassController } from '../controllers/Class/CreateClassController'
 
@@ -25,6 +26,10 @@ export class ExpressRoutes {
 		router.get('/courses',
 			AuthMiddleware.handle,
 			GetAllCoursesController.handle
+		)
+		router.get('/courses/:courseId',
+			AuthMiddleware.handle,
+			GetCourseController.handle
 		)
 		router.post('/courses',
 			AuthMiddleware.handle,
