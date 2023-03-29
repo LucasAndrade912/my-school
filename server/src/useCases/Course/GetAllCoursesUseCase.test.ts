@@ -1,26 +1,11 @@
 import { GetAllCoursesUseCase } from './GetAllCoursesUseCase'
-import { CoursesRepository } from '../../repositories/InMemory/CoursesRepository'
+import { CoursesRepository, dbCourses, fakeUserIdForTests } from '../../repositories/InMemory/CoursesRepository'
 
 function sutFactory() {
-	const userData = [
-		{
-			id: '1',
-			name: 'React',
-			icon: '📚',
-			color: '#D9D9D9'
-		},
-		{
-			id: '2',
-			name: 'Matemática',
-			icon: '📏',
-			color: '#7353BA'
-		}
-	]
-	const userId = 'default-user-for-tests'
 	const repository = new CoursesRepository()
 	const sut = new GetAllCoursesUseCase(repository)
 
-	return { userId, userData, sut }
+	return { userId: fakeUserIdForTests, userData: dbCourses, sut }
 }
 
 describe('Get All Courses Use Case', () => {
